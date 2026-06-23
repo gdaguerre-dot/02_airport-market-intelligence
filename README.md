@@ -174,7 +174,10 @@ Gerónimo Daguerre
 Business Intelligence | Data Analytics | Tourism & Aviation Operations
 
 LinkedIn:
-[Add Link]
+[[Add Link]](https://www.linkedin.com/in/gerodaguerre/)
 
 GitHub:
-[Add Link]
+[[Add Link]](https://github.com/gdaguerre-dot/vuelojusto-air-traffic-market-analysis)
+
+Kaggle:
+https://www.kaggle.com/datasets/umerhaddii/european-flights-dataset 
