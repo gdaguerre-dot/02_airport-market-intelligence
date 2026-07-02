@@ -21,9 +21,7 @@ Durante la Gestión de Proyectos en **VueloJusto**, una plataforma de compensaci
 
 La mayoría de los análisis de tráfico aéreo se detienen en el volumen: qué país o aeropuerto mueve más vuelos. Este proyecto va un paso más allá, aplicando la relación entre capacidad, demanda y retraso (OACI) para transformar el dato de tráfico en un indicador de riesgo:
 
-- El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina **crecimiento sostenido de tráfico** (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un **Índice de Riesgo de Congestión** construido íntegramente en DAX.
-- Esta capa de interpretación surge de experiencia real en operaciones aeroportuarias y en una plataforma de compensación aérea — no es una inferencia genérica sobre el dataset.
-
+El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina **crecimiento sostenido de tráfico** (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un **Índice de Riesgo de Congestión** construido íntegramente en DAX.
 
 ## Enfoque técnico: Power BI de punta a punta
 
