@@ -5,6 +5,7 @@
 > Caso real de análisis aeroportuario: qué mercados europeos presentan mayor riesgo estructural de congestión — y por lo tanto, mayor oportunidad de negocio para una plataforma de compensación aérea — aplicando criterios reales de gestión aeroportuaria, no solo volumen de tráfico.
 
 📄 **Documentación completa:** [`pdf/Airport_Market_Intelligence.pdf`](./pdf/Airport_Market_Intelligence.pdf)
+
 📊 **Dashboard Power BI:** [`powerbi/Airport_Market_Intelligence.pbix`](./powerbi/)
 
 ---
