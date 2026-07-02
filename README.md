@@ -23,7 +23,7 @@ La mayoría de los análisis de tráfico aéreo se detienen en el volumen: qué 
 
 - El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina **crecimiento sostenido de tráfico** (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un **Índice de Riesgo de Congestión** construido íntegramente en DAX.
 - Esta capa de interpretación surge de experiencia real en operaciones aeroportuarias y en una plataforma de compensación aérea — no es una inferencia genérica sobre el dataset.
-- **VueloJusto es un empleador real del autor.** El dataset utilizado es público (Kaggle); el caso de negocio se construye aplicando el criterio adquirido en ese rol sobre datos públicos, no sobre información interna de la compañía.
+
 
 ## Enfoque técnico: Power BI de punta a punta
 
