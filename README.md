@@ -19,9 +19,8 @@ VueloJusto es una plataforma de compensación de pasajeros afectados por demoras
 
 ## Por qué este proyecto es distinto a un dashboard de tráfico aéreo
 
-La mayoría de los análisis de tráfico aéreo se detienen en el volumen qué país o aeropuerto mueve más vuelos. Este proyecto va un paso más allá, aplicando la relación entre capacidad, demanda y retraso (OACI) para transformar el dato de tráfico en un indicador de riesgo
-
-El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina **crecimiento sostenido de tráfico** (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un **Índice de Riesgo de Congestión** construido íntegramente en DAX.
+La mayoría de los análisis de tráfico aéreo se detienen en el volumen: qué país o aeropuerto mueve más vuelos. Este proyecto va un paso más allá, aplicando la relación entre capacidad, demanda y retraso (OACI) para transformar el dato de tráfico en un indicador de riesgo.
+El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina crecimiento sostenido de tráfico (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un Índice de Riesgo de Congestión construido íntegramente en DAX.
 
 ## Dataset
 
