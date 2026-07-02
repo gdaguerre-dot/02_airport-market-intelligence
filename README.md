@@ -12,7 +12,7 @@
 
 ## Caso de negocio: VueloJusto
 
-Durante 2023–2024 trabajé como Coordinador de Gestión de Proyectos en **VueloJusto**, una plataforma de compensación de pasajeros afectados por demoras y cancelaciones de vuelos, y posteriormente como Especialista en Operaciones y Experiencia del Cliente en el **Aeropuerto de Palma de Mallorca**, junto con una formación formal en Gestión Aeroportuaria (ITAérea – UDIMA).
+Durante la Gestión de Proyectos en **VueloJusto**, una plataforma de compensación de pasajeros afectados por demoras y cancelaciones de vuelos, y posteriormente como Especialista en Operaciones y Experiencia del Cliente en el **Aeropuerto de Palma de Mallorca**, junto con una formación formal en Gestión Aeroportuaria (ITAérea – UDIMA).
 
 Esa experiencia dejó una idea central: las demoras que generan un reclamo de compensación rara vez son un evento aislado — casi siempre son la consecuencia visible de un desequilibrio estructural entre la capacidad de un aeropuerto y la demanda que recibe.
 
