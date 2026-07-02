@@ -96,7 +96,7 @@ images/
 
 ## Limitaciones del análisis
 
-El dataset no contiene información de demoras, cancelaciones ni capacidad declarada por aeropuerto — el Índice de Riesgo de Congestión es un indicador direccional construido a partir de proxies declarados (volumen y crecimiento sostenido), no una medición operativa certificada. VueloJusto es un empleador real del autor; el dataset utilizado es público y no corresponde a información interna de la compañía. El KPI de Ingreso Comercial de Referencia usa un valor de benchmark público, no cifras financieras reales de VueloJusto ni de los aeropuertos analizados.
+El dataset no contiene información de demoras, cancelaciones ni capacidad declarada por aeropuerto — el Índice de Riesgo de Congestión es un indicador direccional construido a partir de proxies declarados (volumen y crecimiento sostenido), no una medición operativa certificada. El dataset utilizado es público y corresponde a Kaggle no a información interna de la compañía. El KPI de Ingreso Comercial de Referencia usa un valor de benchmark público, no cifras financieras reales.
 
 ## Autor
 
@@ -107,4 +107,4 @@ Business Intelligence · Análisis de Datos · Operaciones Turísticas y de Avia
 
 ## Licencia
 
-Proyecto desarrollado con fines educativos y de portfolio profesional, sobre un dataset público de Kaggle. El caso de negocio (VueloJusto) corresponde a un empleador real del autor; los criterios de priorización aplicados se apoyan en experiencia profesional real en el sector aeroportuario y turístico, no en datos internos o confidenciales de la compañía.
+Proyecto desarrollado con fines educativos y de portfolio profesional, sobre un dataset público de Kaggle. Los criterios de priorización aplicados se apoyan en experiencia profesional real en el sector aeroportuario y turístico y no en datos internos o confidenciales.
