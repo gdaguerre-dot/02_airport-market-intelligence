@@ -51,7 +51,7 @@ Esquema de estrella:
 | % Acumulado Pareto (Top Airports) | Concentración de mercado por hub |
 | YoY Growth % | Evolución interanual del tráfico |
 | Recovery Rate vs. 2019 | Velocidad y estabilidad de recuperación post-COVID |
-| **Índice de Riesgo de Congestión** | Volumen relativo × crecimiento sostenido — KPI diferencial del proyecto |
+| **Índice de Riesgo de Congestión** | Volumen relativo × crecimiento sostenido |
 
 *KPI complementario (contextual): Ingreso Comercial de Referencia, calculado a partir de un valor de gasto medio por pasajero tomado de benchmarks públicos del sector — se usa como nota de contexto en las recomendaciones, no como medida central del dashboard.*
 
