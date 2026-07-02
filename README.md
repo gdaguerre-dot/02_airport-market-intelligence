@@ -12,7 +12,7 @@
 
 ## Caso de negocio: VueloJusto
 
-Durante la Gestión de Proyectos en **VueloJusto**, una plataforma de compensación de pasajeros afectados por demoras y cancelaciones de vuelos ubicada en el **Aeropuerto de Palma de Mallorca**, tuve una experiencia que me dejó una idea central: las demoras que generan un reclamo de compensación rara vez son un evento aislado — casi siempre son la consecuencia visible de un desequilibrio estructural entre la capacidad de un aeropuerto y la demanda que recibe.
+VueloJusto es una plataforma de compensación de pasajeros afectados por demoras y cancelaciones de vuelos, con sede en el Aeropuerto de Palma de Mallorca. Las demoras que generan un reclamo de compensación rara vez son un evento aislado: casi siempre son la consecuencia de un desequilibrio estructural entre la capacidad de un aeropuerto y la demanda que recibe.
 
 **Pregunta de negocio:**
 ¿Qué aeropuertos europeos muestran mayor riesgo estructural de congestión — por crecimiento sostenido de tráfico sin señales de expansión de capacidad — y representan por lo tanto mayor probabilidad de demoras, mayor riesgo operativo para las aerolíneas y mayor oportunidad de negocio para una plataforma de compensación aérea como VueloJusto?
