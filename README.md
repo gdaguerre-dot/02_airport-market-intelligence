@@ -83,18 +83,30 @@ SQL Server · Power BI · Power Query (M) · DAX · Modelado Dimensional (Star S
 ## Estructura del repositorio
 
 ```
-README.md
-pdf/
-    Airport_Market_Intelligence.pdf
-sql/
-    01_validacion_duplicados.sql
-    02_validacion_cobertura_temporal.sql
-powerbi/
-    Airport_Market_Intelligence.pbix
-images/
-    modelo_estrella.png
-    dashboard_vista_general.png
-    dashboard_riesgo_congestion.png
+airport-market-intelligence/
+│
+├── README.md
+│
+├── pdf/
+│     └── Airport_Market_Intelligence.pdf
+│
+├── powerbi/
+│     └── Airport_Market_Intelligence.pbix
+│
+├── sql/
+│     ├── 01_importacion_dataset.sql
+│     ├── 02_exploratory_data_analysis.sql
+│     ├── 03_data_quality.sql
+│     ├── 04_dimensional_model.sql
+│     └── 05_kpi_queries.sql
+│
+├── images/
+│     ├── arquitectura_proyecto.png
+│     ├── modelo_estrella.png
+│     ├── dashboard_1.png
+│     └── dashboard_2.png
+│
+└── LICENSE
 ```
 
 ## Limitaciones del análisis
