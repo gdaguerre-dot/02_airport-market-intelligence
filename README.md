@@ -121,4 +121,4 @@ El conjunto de datos no contiene información de demoras, cancelaciones ni capac
 
 ## Licencia
 
-Proyecto desarrollado con fines educativos y de portafolio profesional, sobre un conjunto de datos público de Kaggle.
+Proyecto desarrollado con FINES educativos y de portafolio profesional, sobre un conjunto de datos público de Kaggle.
