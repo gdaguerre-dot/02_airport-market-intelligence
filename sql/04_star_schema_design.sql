@@ -46,7 +46,7 @@
 
  • 01_importacion_dataset.sql
  • 02_exploratory_data_analysis.sql
- • 03_data_quality.sql
+ • 03_data_quality_assessment.sql
 
 ******************************************************************************/
 
