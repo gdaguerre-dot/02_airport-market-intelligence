@@ -62,6 +62,12 @@ KPI complementario (contextual): Ingreso Comercial de Referencia, calculado a pa
 - El tráfico aéreo sufrió una contracción histórica en 2020 (**-56,8%** vs. 2019), con una recuperación gradual y desigual: 2021 alcanzó el 53,8% del volumen 2019, y el período Ene-May 2022 alcanzó el 77,1% del mismo período de 2019.
 - Existen aeropuertos con crecimiento sostenido por encima del promedio de mercado que no coinciden con los de mayor volumen absoluto (ej. Antalya, Milán-Malpensa, Sevilla) — el riesgo de congestión no siempre está donde está el tráfico más grande, sino donde crece más rápido.
 
+## Valor para VueloJusto
+
+- **Anticipación comercial:** identificar mercados de alto riesgo de congestión antes de que el volumen de reclamos crezca, permitiendo negociar alianzas con agencias y aerolíneas de forma proactiva, no reactiva.
+- **Gestión de riesgo diferenciada:** distinguir entre aeropuertos ya saturados y aeropuertos en trayectoria de saturación permite ajustar el tipo de intervención comercial a cada perfil.
+- **Narrativa de datos para stakeholders no técnicos:** el dashboard traduce un modelo analítico complejo (volumen + crecimiento + recuperación) en un único índice fácil de comunicar a un equipo comercial o directivo.
+
 ## Recomendaciones estratégicas
 
 **Corto plazo** — Gestión de riesgo operativo antes de la expansión comercial. Priorizar para alianzas comerciales los mercados con Índice de Riesgo de Congestión alto, anticipando mayor volumen de gestión de reclamos.
