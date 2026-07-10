@@ -96,9 +96,9 @@ airport-market-intelligence/
 ├── sql/
 │     ├── 01_importacion_dataset.sql
 │     ├── 02_exploratory_data_analysis.sql
-│     ├── 03_data_quality.sql
-│     ├── 04_dimensional_model.sql
-│     └── 05_kpi_queries.sql
+│     ├── 03_data_quality_assessment.sql
+│     ├── 04_star_schema_design.sql
+│     └── 05_business_kpi_queries.sql
 │
 ├── images/
 │     ├── arquitectura_proyecto.png
