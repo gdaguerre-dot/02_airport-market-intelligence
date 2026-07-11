@@ -91,7 +91,8 @@ Flights.csv → SQL Server (Raw Layer) → EDA & Validation → Power Query (ETL
 - Dim_Airport
 - Dim_Country
 
-*(Star Schema image)*
+<img width="557" height="347" alt="image" src="https://github.com/user-attachments/assets/8c83117c-c132-4ca5-b95b-2fa2b36571bf" />
+
 
 ---
 
