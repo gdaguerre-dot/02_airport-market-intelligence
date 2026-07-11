@@ -1,124 +1,267 @@
-# Inteligencia de mercado aeroportuario
+# Airport Market Intelligence
+## Business Intelligence for Airport Market Prioritization
 
-`Power BI` · `Power Query (M)` · `DAX` · `SQL Server` · `Business Intelligence` · `Storytelling` · `Aviation Industry`
+**Power BI · SQL Server · Power Query (M) · DAX · Data Modeling · Business Intelligence · Storytelling · Aviation Industry**
 
-Caso real de análisis aeroportuario: qué mercados europeos presentan mayor riesgo estructural de congestión — y por lo tanto, mayor oportunidad de negocio para una plataforma de compensación aérea — aplicando criterios reales de gestión aeroportuaria, no solo volumen de tráfico.
+---
 
-📄 Documentación completa: [`pdf/Airport_Market_Intelligence.pdf`](pdf/Airport_Market_Intelligence.pdf)
+## Project Overview
 
-📊 Panel de control de Power BI: [`powerbi/Airport_Market_Intelligence.pbix`](powerbi/Airport_Market_Intelligence.pbix)
+Airport Market Intelligence is a Business Intelligence project that analyzes more than **688,000 European air traffic records (2016–2022)** to identify airport markets with the highest strategic value for **VueloJusto**, a company specialized in passenger compensation services.
 
-## Caso de negocio: VueloJusto
+Rather than focusing only on traffic volume, the project introduces a business-oriented analytical approach based on airport market concentration, traffic evolution, post-pandemic recovery and a custom **Congestion Risk Index**, developed entirely in Power BI using Power Query and DAX.
 
-VueloJusto es una plataforma de compensación de pasajeros afectados por demoras y cancelaciones de vuelos, con sede en el Aeropuerto de Palma de Mallorca. Las demoras que generan un reclamo de compensación rara vez son un evento aislado: casi siempre son la consecuencia de un desequilibrio estructural entre la capacidad de un aeropuerto y la demanda que recibe.
+The objective is to transform operational air traffic data into actionable business insights that support commercial decision-making.
 
-**Pregunta de negocio:** ¿Qué aeropuertos europeos muestran mayor riesgo estructural de congestión — por crecimiento sostenido de tráfico sin señales de expansión de capacidad — y representan por lo tanto mayor probabilidad de demoras, mayor riesgo operativo para las aerolíneas y mayor oportunidad de negocio para una plataforma de compensación aérea como VueloJusto?
+---
 
-## Por qué este proyecto es distinto a un tablero de tráfico aéreo
+# Business Problem
 
-La mayoría de los análisis de tráfico aéreo se detienen en el volumen: qué país o aeropuerto mueve más vuelos. Este proyecto va un paso más allá, aplicando la relación entre capacidad, demanda y retraso (OACI) para transformar el dato de tráfico en un indicador de riesgo.
+VueloJusto operates in the passenger compensation industry, where commercial resources are limited and must be allocated strategically.
 
-El volumen de operaciones se usa como proxy de demanda (el dataset no incluye datos individuales de pasajeros ni de demoras), pero la priorización final no se basa solo en volumen — combina crecimiento sostenido de tráfico (como proxy de tensión entre capacidad y demanda) con volumen relativo, en un **Índice de Riesgo de Congestión** construido íntegramente en DAX.
+Although flight delays generate business opportunities, the available dataset does not include delay or compensation claim information.
 
-## Conjunto de datos
+Therefore, this project estimates airport congestion risk using air traffic volume and sustained traffic growth as analytical proxies.
 
-| Métrica | Valor |
-|---|---|
-| Registros | 688.099 |
-| Países | 42 |
-| Aeropuertos | 332 (333 nombres, ver nota de calidad de datos) |
-| Período | 2016-01-01 a 2022-05-31 (2022 es un año parcial: enero–mayo) |
-| Grano | **Diario** por aeropuerto (columna `FLT_DATE`) — no mensual |
-| Fuente | [European Flights Dataset — Kaggle](https://www.kaggle.com/datasets/umerhaddii/european-flights-dataset) |
+### Business Question
 
-Variables principales: país (`STATE_NAME`), aeropuerto (`APT_ICAO`, `APT_NAME`), fecha (`FLT_DATE`, `YEAR`, `MONTH_NUM`), salidas/llegadas/movimientos totales (`FLT_DEP_1`, `FLT_ARR_1`, `FLT_TOT_1`), y sus equivalentes bajo reglas de vuelo instrumental (`FLT_*_IFR_2`).
+> **Which European airport markets present the highest structural congestion risk and therefore represent the greatest commercial opportunity for VueloJusto?**
 
-**Nota de calidad de datos:** las columnas IFR (`FLT_TOT_IFR_2` y relacionadas) tienen ~70% de valores nulos (`NA`), por lo que el volumen de operaciones del modelo se calcula sobre `FLT_TOT_1` (total de movimientos), no sobre las columnas IFR.
+---
 
-## Modelo de datos
+# Analytical Approach
 
-Esquema de estrella:
+The project follows a complete Business Intelligence workflow:
 
-- **Tabla de hechos:** `Fact_TraficoAereo`
-- **Dimensiones:** `Dim_Fecha`, `Dim_Aeropuerto`, `Dim_Pais`
+- Exploratory Data Analysis (EDA)
+- Data Quality Assessment
+- SQL Validation
+- Dimensional Data Modeling (Star Schema)
+- Power Query (M) Data Preparation
+- DAX Measures and KPIs
+- Executive Dashboard Design
+- Data Storytelling and Business Recommendations
 
-## Indicadores clave de rendimiento (KPI)
+---
 
-| KPI | Qué mide |
-|---|---|
-| Total de Operaciones | Volumen base del mercado |
-| Contribución de los 5 países principales | Concentración de mercado por país |
-| % Acumulado Pareto (Principales aeropuertos) | Concentración de mercado por hub |
-| Crecimiento interanual % | Evolución interanual del tráfico |
-| Tasa de recuperación en comparación con 2019 | Velocidad y estabilidad de recuperación post-COVID |
-| Índice de Riesgo de Congestión | Volumen relativo × crecimiento sostenido |
+# Dataset
 
-KPI complementario (contextual): Ingreso Comercial de Referencia, calculado a partir de un valor de gasto medio por pasajero tomado de benchmarks públicos del sector — se usa como nota de contexto en las recomendaciones, no como medida central del tablero.
+| Metric | Value |
+|---------|-------|
+| Source | Kaggle – European Flights Dataset |
+| Records | 688,099 |
+| Countries | 42 |
+| Airports | 332 |
+| Coverage | 2016–2022 |
+| Granularity | Airport-Day |
 
-## Principales hallazgos
+### Main Variables
 
-- Un número reducido de países y aeropuertos concentra una proporción significativa del tráfico aéreo europeo: los 5 países principales (España, Alemania, Reino Unido, Francia, Italia) concentran el **55,6%** del tráfico total, y solo **84 de 333 aeropuertos (25,2%)** explican el 80% del volumen (Pareto).
-- España, Alemania, Reino Unido y Francia se confirman como los mercados de mayor volumen y estabilidad.
-- El tráfico aéreo sufrió una contracción histórica en 2020 (**-56,8%** vs. 2019), con una recuperación gradual y desigual: 2021 alcanzó el 53,8% del volumen 2019, y el período Ene-May 2022 alcanzó el 77,1% del mismo período de 2019.
-- Existen aeropuertos con crecimiento sostenido por encima del promedio de mercado que no coinciden con los de mayor volumen absoluto (ej. Antalya, Milán-Malpensa, Sevilla) — el riesgo de congestión no siempre está donde está el tráfico más grande, sino donde crece más rápido.
+- Country
+- Airport
+- Flight Date
+- Arrivals
+- Departures
+- Total Movements
+- IFR Operations
 
-## Valor para VueloJusto
+### Data Quality Notes
 
-- **Anticipación comercial:** identificar mercados de alto riesgo de congestión antes de que el volumen de reclamos crezca, permitiendo negociar alianzas con agencias y aerolíneas de forma proactiva, no reactiva.
-- **Gestión de riesgo diferenciada:** distinguir entre aeropuertos ya saturados y aeropuertos en trayectoria de saturación permite ajustar el tipo de intervención comercial a cada perfil.
-- **Narrativa de datos para stakeholders no técnicos:** el dashboard traduce un modelo analítico complejo (volumen + crecimiento + recuperación) en un único índice fácil de comunicar a un equipo comercial o directivo.
+- Approximately 70% of IFR variables contain missing values.
+- Operational KPIs are calculated using **Total Movements** instead of IFR variables.
+- The dataset contains 333 airport names but represents 332 unique airports.
+- Year 2022 includes data from January to May only.
 
-## Recomendaciones estratégicas
+---
 
-**Corto plazo** — Gestión de riesgo operativo antes de la expansión comercial. Priorizar para alianzas comerciales los mercados con Índice de Riesgo de Congestión alto, anticipando mayor volumen de gestión de reclamos.
+# Data Architecture
 
-**Mediano plazo** — Monitoreo diferenciado por tipo de riesgo. Distinguir entre hubs grandes ya cerca de su límite estructural (ej. Frankfurt, Madrid-Barajas) y aeropuertos medianos con crecimiento acelerado que se acercan a uno (ej. Antalya, Milán-Malpensa) — cada perfil requiere una estrategia de monitoreo distinta.
+The analytical model follows a **Star Schema** optimized for Power BI performance.
 
-**Largo plazo** — Recuperación post-COVID como filtro de riesgo antes de invertir. Priorizar para compromisos comerciales de mayor plazo (3-7 años) los mercados que combinan alto riesgo de congestión con una recuperación post-2019 rápida y sostenida.
+### Fact Table
 
-## Tecnologías utilizadas
+- Fact_AirTraffic
 
-SQL Server · Power BI · Power Query (M) · DAX · Modelado Dimensional (Star Schema) · Storytelling con datos
+### Dimensions
 
-## Estructura del repositorio
+- Dim_Date
+- Dim_Airport
+- Dim_Country
 
-```
+*(Star Schema image)*
+
+---
+
+# SQL Workflow
+
+SQL Server is used during the initial validation stage to verify the integrity of the source dataset before loading it into Power BI.
+
+Included scripts:
+
+- Dataset Import
+- Exploratory Data Analysis
+- Data Quality Assessment
+- Star Schema Design
+- Business KPI Queries
+
+---
+
+# Power Query Workflow
+
+Power Query is responsible for preparing the analytical model.
+
+Main transformations include:
+
+- Data type validation
+- Duplicate detection
+- Null value assessment
+- Date dimension creation
+- Airport dimension creation
+- Country dimension creation
+- Fact table preparation
+
+---
+
+# DAX Measures
+
+### Volume KPIs
+
+- Total Flights
+- Average Flights
+- Flights per Airport
+- Flights per Country
+
+### Market KPIs
+
+- Market Share
+- Top Airport Contribution
+- Top Country Contribution
+- Pareto Analysis
+
+### Growth KPIs
+
+- YoY Growth
+- Annual Growth Rate
+- Recovery Rate vs 2019
+- Rolling Average
+
+### Strategic KPIs
+
+- Congestion Risk Index
+- Opportunity Score
+- Strategic Priority
+
+---
+
+# Dashboard
+
+The Power BI dashboard contains multiple analytical views:
+
+- Executive Overview
+- Country Analysis
+- Airport Analysis
+- Traffic Evolution
+- Post-COVID Recovery
+- Congestion Risk Assessment
+- Strategic Recommendations
+
+*(Dashboard screenshots)*
+
+---
+
+# Main Findings
+
+- The five largest countries represent **55.6%** of European air traffic.
+- Approximately **25% of airports generate 80%** of total traffic.
+- Air traffic decreased **56.8%** during 2020.
+- Traffic recovered to **77.1%** of 2019 levels by May 2022.
+- Airport growth dynamics differ significantly from traffic volume alone.
+
+---
+
+# Business Recommendations
+
+## Short Term
+
+Prioritize commercial initiatives in airports with the highest Congestion Risk Index.
+
+## Medium Term
+
+Monitor high-growth airports separately from mature hub airports.
+
+## Long Term
+
+Use recovery patterns and sustained growth as decision criteria for strategic partnerships.
+
+---
+
+# Skills Demonstrated
+
+- SQL Server
+- Data Cleaning
+- Exploratory Data Analysis
+- Data Quality Assessment
+- Star Schema Modeling
+- Power Query (M)
+- DAX
+- Power BI
+- KPI Design
+- Business Intelligence
+- Data Storytelling
+- Business Analysis
+
+---
+
+# Repository Structure
+
+```text
 airport-market-intelligence/
+
 │
 ├── README.md
 │
 ├── pdf/
-│     └── Airport_Market_Intelligence.pdf
+│   └── Airport_Market_Intelligence.pdf
 │
 ├── powerbi/
-│     └── Airport_Market_Intelligence.pbix
+│   └── Airport_Market_Intelligence.pbix
 │
 ├── sql/
-│     ├── 01_importacion_dataset.sql
-│     ├── 02_exploratory_data_analysis.sql
-│     ├── 03_data_quality_assessment.sql
-│     ├── 04_star_schema_design.sql
-│     └── 05_business_kpi_queries.sql
+│   ├── 01_import_dataset.sql
+│   ├── 02_exploratory_analysis.sql
+│   ├── 03_data_quality.sql
+│   ├── 04_star_schema.sql
+│   └── 05_business_queries.sql
 │
 ├── images/
-│     ├── arquitectura_proyecto.png
-│     ├── modelo_estrella.png
-│     ├── dashboard_1.png
-│     └── dashboard_2.png
+│   ├── star_schema.png
+│   ├── dashboard_overview.png
+│   ├── dashboard_country_analysis.png
+│   ├── dashboard_airport_analysis.png
+│   └── dashboard_congestion_risk.png
 │
 └── LICENSE
 ```
 
-## Limitaciones del análisis
+---
 
-El conjunto de datos no contiene información de demoras, cancelaciones ni capacidad declarada por aeropuerto — el Índice de Riesgo de Congestión es un indicador direccional construido a partir de proxies declarados (volumen y crecimiento sostenido), no una medición operativa certificada. El conjunto de datos utilizado es público y corresponde a Kaggle, no a información interna de la compañía. El KPI de Ingreso Comercial de Referencia utiliza un valor de referencia público, no cifras financieras reales. 2022 es un año incompleto (enero-mayo) en el dataset fuente. El aeropuerto iGA Istanbul (LTFM) se excluye del ranking de crecimiento sostenido por tratarse de un aeropuerto de apertura reciente (2019), cuyo crecimiento refleja una puesta en operación y no tensión capacidad-demanda orgánica.
+# Limitations
 
-## Autor
+- The dataset does not include flight delays or cancellations.
+- Airport capacity is estimated indirectly through traffic growth.
+- 2022 is a partial year.
+- The Congestion Risk Index is a directional indicator rather than a certified operational metric.
 
-**Gerónimo Daguerre** — Business Intelligence · Análisis de Datos · Operaciones Turísticas y de Aviación
+---
 
-[LinkedIn](https://www.linkedin.com/in/TU-USUARIO-AQUI) · [GitHub](https://github.com/TU-USUARIO-AQUI)
+# Author
 
-## Licencia
+**Gerónimo Daguerre**
 
-Proyecto desarrollado con FINES educativos y de portafolio profesional, sobre un conjunto de datos público de Kaggle.
+Business Intelligence • Data Analytics • Airport Operations • Customer Experience • Project Management
+
+---
+
+# License
+
+This project was developed for educational purposes and professional portfolio use using a publicly available Kaggle dataset.
