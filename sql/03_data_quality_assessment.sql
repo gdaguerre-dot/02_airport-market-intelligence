@@ -36,30 +36,34 @@
       01_importacion_dataset.sql
       02_exploratory_data_analysis.sql
 
+------------------------------------------------------------------------------
+ Dimensiones de calidad evaluadas
+------------------------------------------------------------------------------
+
+ ✔ Completitud
+ ✔ Unicidad
+ ✔ Consistencia
+ ✔ Validez
+ ✔ Cobertura temporal
+
 ******************************************************************************/
 
 USE AirportMarketDB;
 GO
 
 /******************************************************************************
- 1. Registros duplicados
+ 1. Cobertura temporal
 ******************************************************************************/
 
--- Verificar si existen registros completamente duplicados.
+-- Verificar el período cubierto por el dataset.
 
 SELECT
-    YEAR,
-    MONTH_NUM,
-    FLT_DATE,
-    APT_ICAO,
-    COUNT(*) AS Cantidad
-FROM Flights_Raw
-GROUP BY
-    YEAR,
-    MONTH_NUM,
-    FLT_DATE,
-    APT_ICAO
-HAVING COUNT(*) > 1;
+
+    MIN(FLT_DATE) AS Fecha_Minima,
+    MAX(FLT_DATE) AS Fecha_Maxima,
+    COUNT(DISTINCT FLT_DATE) AS Dias_Distintos
+
+FROM Flights_Raw;
 
 
 /******************************************************************************
@@ -71,39 +75,89 @@ HAVING COUNT(*) > 1;
 SELECT
 
     SUM(CASE WHEN YEAR IS NULL THEN 1 ELSE 0 END) AS Nulos_YEAR,
-
     SUM(CASE WHEN MONTH_NUM IS NULL THEN 1 ELSE 0 END) AS Nulos_MONTH,
-
     SUM(CASE WHEN FLT_DATE IS NULL THEN 1 ELSE 0 END) AS Nulos_FECHA,
-
     SUM(CASE WHEN APT_ICAO IS NULL THEN 1 ELSE 0 END) AS Nulos_ICAO,
-
     SUM(CASE WHEN APT_NAME IS NULL THEN 1 ELSE 0 END) AS Nulos_AEROPUERTO,
-
     SUM(CASE WHEN STATE_NAME IS NULL THEN 1 ELSE 0 END) AS Nulos_PAIS
 
 FROM Flights_Raw;
 
 
 /******************************************************************************
- 3. Valores "NA"
+ 3. Registros duplicados
+******************************************************************************/
+
+-- Verificar duplicados según el grano real del dataset
+-- (Aeropuerto + Fecha).
+
+SELECT
+
+    YEAR,
+    MONTH_NUM,
+    FLT_DATE,
+    APT_ICAO,
+    COUNT(*) AS Cantidad
+
+FROM Flights_Raw
+
+GROUP BY
+
+    YEAR,
+    MONTH_NUM,
+    FLT_DATE,
+    APT_ICAO
+
+HAVING COUNT(*) > 1;
+
+
+/******************************************************************************
+ 4. Consistencia entre código ICAO y nombre del aeropuerto
+******************************************************************************/
+
+-- Detectar códigos ICAO asociados a más de un nombre.
+
+SELECT
+
+    APT_ICAO,
+    COUNT(DISTINCT APT_NAME) AS Distinct_Names
+
+FROM Flights_Raw
+
+GROUP BY APT_ICAO
+
+HAVING COUNT(DISTINCT APT_NAME) > 1;
+
+
+-- Inspección del caso detectado.
+
+SELECT DISTINCT
+
+    APT_ICAO,
+    APT_NAME
+
+FROM Flights_Raw
+
+WHERE APT_ICAO = 'LLBG';
+
+
+/******************************************************************************
+ 5. Valores "NA"
 ******************************************************************************/
 
 -- Cuantificar la presencia de valores "NA" en las columnas IFR.
 
 SELECT
 
-    SUM(CASE WHEN FLT_DEP_IFR_2='NA' THEN 1 ELSE 0 END) AS DEP_IFR_NA,
-
-    SUM(CASE WHEN FLT_ARR_IFR_2='NA' THEN 1 ELSE 0 END) AS ARR_IFR_NA,
-
-    SUM(CASE WHEN FLT_TOT_IFR_2='NA' THEN 1 ELSE 0 END) AS TOT_IFR_NA
+    SUM(CASE WHEN FLT_DEP_IFR_2 = 'NA' THEN 1 ELSE 0 END) AS DEP_IFR_NA,
+    SUM(CASE WHEN FLT_ARR_IFR_2 = 'NA' THEN 1 ELSE 0 END) AS ARR_IFR_NA,
+    SUM(CASE WHEN FLT_TOT_IFR_2 = 'NA' THEN 1 ELSE 0 END) AS TOT_IFR_NA
 
 FROM Flights_Raw;
 
 
 /******************************************************************************
- 4. Valores negativos
+ 6. Valores negativos
 ******************************************************************************/
 
 -- Verificar que no existan cantidades negativas.
@@ -114,38 +168,34 @@ FROM Flights_Raw
 
 WHERE
 
-    FLT_DEP_1 < 0
-
-OR  FLT_ARR_1 < 0
-
-OR  FLT_TOT_1 < 0;
+       FLT_DEP_1 < 0
+    OR FLT_ARR_1 < 0
+    OR FLT_TOT_1 < 0;
 
 
 /******************************************************************************
- 5. Consistencia matemática
+ 7. Consistencia matemática
 ******************************************************************************/
 
--- Verificar que:
+-- Validar que:
 -- Salidas + Llegadas = Total
 
 SELECT *
 
 FROM Flights_Raw
 
-WHERE
-
-FLT_DEP_1 + FLT_ARR_1 <> FLT_TOT_1;
+WHERE FLT_DEP_1 + FLT_ARR_1 <> FLT_TOT_1;
 
 
 /******************************************************************************
- 6. Integridad de códigos ICAO
+ 8. Integridad de códigos ICAO
 ******************************************************************************/
 
 -- Verificar longitud del código ICAO.
 
 SELECT DISTINCT
 
-APT_ICAO
+    APT_ICAO
 
 FROM Flights_Raw
 
@@ -153,7 +203,7 @@ WHERE LEN(APT_ICAO) <> 4;
 
 
 /******************************************************************************
- 7. Países sin nombre
+ 9. Países sin nombre
 ******************************************************************************/
 
 SELECT *
@@ -162,13 +212,13 @@ FROM Flights_Raw
 
 WHERE
 
-STATE_NAME IS NULL
+    STATE_NAME IS NULL
 
-OR LTRIM(RTRIM(STATE_NAME))='';
+    OR LTRIM(RTRIM(STATE_NAME)) = '';
 
 
 /******************************************************************************
- 8. Aeropuertos sin nombre
+10. Aeropuertos sin nombre
 ******************************************************************************/
 
 SELECT *
@@ -177,41 +227,22 @@ FROM Flights_Raw
 
 WHERE
 
-APT_NAME IS NULL
+    APT_NAME IS NULL
 
-OR LTRIM(RTRIM(APT_NAME))='';
-
-
-/******************************************************************************
- 9. Cobertura temporal
-******************************************************************************/
-
--- Detectar fechas faltantes.
-
-SELECT
-
-MIN(FLT_DATE) AS Fecha_Minima,
-
-MAX(FLT_DATE) AS Fecha_Maxima,
-
-COUNT(DISTINCT FLT_DATE) AS Dias_Distintos
-
-FROM Flights_Raw;
+    OR LTRIM(RTRIM(APT_NAME)) = '';
 
 
 /******************************************************************************
- 10. Valores extremos
+11. Valores extremos
 ******************************************************************************/
 
--- Identificar las mayores cantidades de operaciones.
+-- Identificar los mayores volúmenes diarios de operaciones.
 
 SELECT TOP (20)
 
-APT_NAME,
-
-FLT_DATE,
-
-FLT_TOT_1
+    APT_NAME,
+    FLT_DATE,
+    FLT_TOT_1
 
 FROM Flights_Raw
 
@@ -219,14 +250,13 @@ ORDER BY FLT_TOT_1 DESC;
 
 
 /******************************************************************************
- 11. Distribución de registros por año
+12. Distribución de registros por año
 ******************************************************************************/
 
 SELECT
 
-YEAR,
-
-COUNT(*) AS Registros
+    YEAR,
+    COUNT(*) AS Registros
 
 FROM Flights_Raw
 
@@ -240,18 +270,27 @@ ORDER BY YEAR;
 ******************************************************************************/
 
 -- No se detectaron registros duplicados para la combinación
--- Fecha + Aeropuerto (esperado).
+-- Fecha + Aeropuerto, correspondiente al grano real del dataset.
 
--- Las variables principales presentan una alta completitud.
+-- Las variables principales presentan un alto nivel de completitud.
 
--- Las columnas IFR contienen una cantidad significativa de valores "NA",
--- por lo que no serán utilizadas para el cálculo de indicadores
--- principales del proyecto.
+-- Se detectó una única inconsistencia de nomenclatura:
+-- el aeropuerto LLBG aparece asociado a dos nombres diferentes
+-- ("Ben Gurion International" y
+-- "Tel Aviv - Ben Gurion International").
 
--- La variable FLT_TOT_1 presenta consistencia con la suma de llegadas
--- y salidas.
+-- La estandarización de dicho atributo se realizó posteriormente
+-- durante el proceso ETL, antes de construir Dim_Aeropuerto,
+-- garantizando la unicidad de la clave de negocio.
 
--- Los códigos ICAO mantienen el formato estándar de cuatro caracteres.
+-- Las columnas IFR presentan una elevada proporción de valores "NA",
+-- por lo que no fueron utilizadas como fuente principal para
+-- la construcción de indicadores estratégicos.
+
+-- La variable FLT_TOT_1 mantiene consistencia matemática con la suma
+-- de llegadas y salidas.
+
+-- Los códigos ICAO respetan el estándar internacional de cuatro caracteres.
 
 -- El conjunto de datos presenta una calidad adecuada para continuar
 -- con el proceso ETL.
@@ -261,22 +300,29 @@ ORDER BY YEAR;
  Conclusión
 ******************************************************************************/
 
--- La evaluación de Data Quality permitió validar la confiabilidad del
+-- La evaluación de calidad permitió validar la confiabilidad del
 -- conjunto de datos utilizado en el proyecto.
 
 -- Se verificó:
 
 -- ✔ Integridad estructural.
--- ✔ Ausencia de duplicados relevantes.
--- ✔ Consistencia matemática.
--- ✔ Integridad de claves geográficas.
+-- ✔ Ausencia de duplicados al grano correcto (Fecha + Aeropuerto).
+-- ✔ Consistencia matemática de las operaciones.
+-- ✔ Integridad de los códigos ICAO.
+-- ✔ Alta completitud de las variables principales.
 -- ✔ Identificación de columnas con alta proporción de valores "NA".
+-- ✔ Detección de una inconsistencia de nomenclatura (LLBG),
+--   corregida posteriormente durante el proceso ETL.
 
--- Como resultado, se decidió utilizar FLT_TOT_1 como métrica principal
--- del análisis y excluir las variables IFR de los indicadores
--- estratégicos debido a su baja completitud.
+-- Como resultado se decidió:
 
--- El siguiente paso consistirá en diseñar el modelo dimensional que
--- servirá de base para el desarrollo del dashboard en Power BI.
+-- ✔ Utilizar FLT_TOT_1 como principal indicador de tráfico aéreo.
+-- ✔ Excluir las variables IFR del cálculo de KPIs por su baja completitud.
+-- ✔ Estandarizar el nombre del aeropuerto LLBG antes de construir
+--   Dim_Aeropuerto, preservando la unicidad de la clave de negocio.
+
+-- El siguiente paso consiste en construir el modelo dimensional
+-- que servirá de base para el desarrollo del dashboard
+-- Airport Market Intelligence en Power BI.
 
 ******************************************************************************
