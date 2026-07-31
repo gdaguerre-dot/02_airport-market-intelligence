@@ -2,7 +2,7 @@
 
 **Caso de negocio: VueloJusto**
 
-Proyecto final de Data Analytics desarrollado con **SQL Server, Power Query, DAX y Power BI** para identificar los aeropuertos europeos con mayor potencial comercial mediante un enfoque de Business Intelligence y análisis de datos.
+Proyecto de Data Analytics desarrollado con **SQL Server, Power Query, DAX y Power BI** para identificar los aeropuertos europeos con mayor potencial comercial mediante un enfoque de Business Intelligence y análisis de datos.
 
 ## Resumen del proyecto
 
