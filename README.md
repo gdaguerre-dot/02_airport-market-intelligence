@@ -31,7 +31,7 @@ La pregunta central del proyecto es:
 
 **European Flights Dataset (Kaggle, acceso público)**
 
-| Característica     |                          Valor |
+| Caracteristica     |                          Valor |
 | ------------------ | -----------------------------: |
 | Registros          |                        688.099 |
 | Países             |                             42 |
