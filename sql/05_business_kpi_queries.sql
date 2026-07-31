@@ -298,7 +298,7 @@ GROUP BY APT_ICAO
 -- Las variables IFR fueron excluidas de los KPIs debido a la elevada
 -- proporción de valores "NA" identificada durante la etapa de Data Quality.
 
--- El indicador de Riesgo de Congestión será calculado en Power BI
+-- El Congestion Opportunity Score (COS) será calculado en Power BI
 -- mediante DAX, ya que requiere combinar múltiples métricas,
 -- normalización y contexto dinámico de filtros.
 
