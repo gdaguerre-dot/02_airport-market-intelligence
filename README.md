@@ -193,4 +193,4 @@ GitHub: [https://github.com/gdaguerre-dot](https://github.com/gdaguerre-dot)
 
 ## Licencia
 
-Este proyecto fue desarrollado con fines educativos y de portafolio profesional utilizando un conjunto de datos de acceso público disponible en Kaggle. Ver [LICENSE](LICENSE) para más detalles.
+Este proyecto fue desarrollado con fines educativos y de portafolio profesional utilizando un conjunto de datos de acceso público disponible en Kaggle.
