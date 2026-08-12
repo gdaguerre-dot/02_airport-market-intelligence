@@ -172,33 +172,7 @@ airport-market-intelligence/
     ├── dashboard_airport_analysis.png
     ├── dashboard_air_traffic_evolution.png
     └── dashboard_strategic_opportunities.png
-```
-airport-market-intelligence/
-│
-├── README.md
-├── Airport-Market-Intelligence-BI-Case-Study.pdf
-│
-├── docs/
-│   ├── dax_measure_catalog.md
-│   └── power_query_m.md
-│
-├── powerbi/
-│   └── Airport_Market_Intelligence.pbix
-│
-├── sql/
-│   ├── 01_import_dataset.sql
-│   ├── 02_exploratory_analysis.sql
-│   ├── 03_data_quality.sql
-│   ├── 04_star_schema.sql
-│   └── 05_business_queries.sql
-│
-└── images/
-    ├── dashboard_overview.png
-    ├── dashboard_country_analysis.png
-    ├── dashboard_airport_analysis.png
-    ├── dashboard_air_traffic_evolution.png
-    └── dashboard_strategic_opportunities.png
-    
+```   
 ---
 
 ## Full case study
