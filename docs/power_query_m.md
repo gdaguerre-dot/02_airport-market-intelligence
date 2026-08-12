@@ -1,7 +1,9 @@
 # Power Query (M) — ETL Documentation
 
 **Proyecto:** Airport Market Intelligence
+
 **Motor de origen:** SQL Server (`AirportMarketDB`, tabla `dbo.flights_Raw`)
+
 **Autor:** Gerónimo Daguerre
 
 Este documento describe las consultas de Power Query que transforman la capa Raw (SQL Server) en el modelo dimensional (Star Schema) consumido por el dashboard. El orden de lectura sigue la dependencia real entre consultas: `Flights_Raw → Flights_Clean → {Dim_Pais, Dim_Aeropuerto, Dim_Fecha} → Fact_TraficoAereo`.
