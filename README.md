@@ -156,24 +156,31 @@ Cada página responde una pregunta específica de negocio y forma parte de una n
 
 ```
 airport-market-intelligence/
+│
 ├── README.md
 ├── Airport-Market-Intelligence-BI-Case-Study.pdf
+│
+├── docs/
+│   ├── dax_measure_catalog.md
+│   └── power_query_m.md
+│
 ├── powerbi/
 │   └── Airport_Market_Intelligence.pbix
+│
 ├── sql/
 │   ├── 01_import_dataset.sql
-│   ├── 02_exploratory_analysis.sql
-│   ├── 03_data_quality.sql
-│   ├── 04_star_schema.sql
-│   └── 05_business_queries.sql
+│   ├── 02_exploratory_data_analysis.sql
+│   ├── 03_data_quality_assessment.sql
+│   ├── 04_star_schema_design.sql
+│   └── 05_business_kpi_queries.sql
+│
 └── images/
     ├── dashboard_overview.png
     ├── dashboard_country_analysis.png
     ├── dashboard_airport_analysis.png
     ├── dashboard_air_traffic_evolution.png
     └── dashboard_strategic_opportunities.png
-```   
----
+```
 
 ## Full case study
 
