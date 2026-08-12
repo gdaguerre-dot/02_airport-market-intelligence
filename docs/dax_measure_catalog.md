@@ -1,7 +1,9 @@
 # DAX Measure Catalog
 
 **Proyecto:** Airport Market Intelligence
+
 **Modelo:** Star Schema (Fact_TraficoAereo, Dim_Fecha, Dim_Aeropuerto, Dim_Pais)
+
 **Autor:** Gerónimo Daguerre
 
 Este documento cataloga todas las medidas DAX desarrolladas para el dashboard ejecutivo, organizadas por categoría funcional. Las medidas fueron diseñadas para que la lógica de negocio —criterios de elegibilidad, exclusión de anomalías, normalización— viva dentro del modelo semántico y no dependa de la interpretación manual del analista.
