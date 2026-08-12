@@ -38,7 +38,7 @@ DIVIDE(
     [Total Airports]
 )
 
-# Market Analysis 
+## Market Analysis 
 
 Market Share % =
 DIVIDE(
@@ -69,7 +69,7 @@ DIVIDE(
     )
 )
 
-# Time Intelligence
+## Time Intelligence
 
 Flights Previous Year =
 CALCULATE(
@@ -113,7 +113,7 @@ DIVIDE(
     [Flights 2019 Comparable]
 )
 
-# Operations
+## Operations
 
 Total Arrivals =
 SUM(Fact_TraficoAereo[Vuelos_Llegada])
@@ -121,7 +121,7 @@ SUM(Fact_TraficoAereo[Vuelos_Llegada])
 Total Departures =
 SUM(Fact_TraficoAereo[Vuelos_Salida])
 
-# Rankings
+## Rankings
 
 Airport Rank =
 RANKX(
@@ -163,7 +163,7 @@ MAXX(
     [Total Flights]
 )
 
-# Growth Opportunities
+## Growth Opportunities
 
 Crecimiento sostenido promedio entre 2018 y 2019 para aeropuertos elegibles.
 
@@ -268,7 +268,7 @@ DIVIDE(
     MaxGrowth
 )
 
-# Growth Opportunities
+## Growth Opportunities
 
 Indicador compuesto de oportunidad estratégica.
 
@@ -337,7 +337,7 @@ MAXX(
     Dim_Aeropuerto[Aeropuerto]
 )
 
-# Supporting Measures
+## Supporting Measures
 
 Max Flights =
 MAXX(
