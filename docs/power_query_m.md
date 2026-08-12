@@ -31,13 +31,11 @@ Conexión directa a la capa Raw en SQL Server.
 
 ```m
 let
-    Origen = Sql.Database("Geronimo\SQLEXPRESS", "AirportMarketDB"),
+    Origen = Sql.Database("localhost\SQLEXPRESS", "AirportMarketDB"),
     dbo_flights_Raw = Origen{[Schema="dbo",Item="flights_Raw"]}[Data]
 in
     dbo_flights_Raw
 ```
-
-> ⚠️ **Antes de publicar:** esta consulta apunta a una instancia local (`Geronimo\SQLEXPRESS`). El archivo `.pbix` funciona igual para cualquiera que lo abra —Power BI usa los datos cacheados en el modelo (import mode)— pero si alguien presiona **Refresh**, va a fallar porque no tiene acceso a tu SQL Server local. Es un comportamiento esperado y coherente con la arquitectura documentada (SQL Server como Raw Layer), así que no es un error, pero vale la pena una línea en el README aclarándolo, para que quien abra el archivo no interprete el fallo de refresh como un bug.
 
 ---
 
