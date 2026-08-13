@@ -108,9 +108,9 @@ El indicador combina dos dimensiones estratégicas:
 COS = 0.50 × Market Share Normalized + 0.50 × Growth Score
 ```
 
-El crecimiento se calcula como el promedio del crecimiento interanual 2018–2019, utilizando únicamente aeropuertos que cumplen criterios mínimos de elegibilidad — **más de 200.000 vuelos totales en el período** y **al menos 10.000 vuelos en cada uno de 2017, 2018 y 2019** — un umbral que evita que aeropuertos regionales con series históricas incompletas o de muy bajo volumen distorsionen el ranking con variaciones porcentuales extremas.
+El crecimiento se calcula como el **promedio de las tasas de crecimiento interanual 2017→2018 y 2018→2019**, utilizando únicamente aeropuertos que cumplen criterios mínimos de elegibilidad — **más de 200.000 vuelos totales en el período** y **al menos 10.000 vuelos en cada uno de 2017, 2018 y 2019** — un umbral que evita que aeropuertos regionales con series históricas incompletas o de muy bajo volumen distorsionen el ranking con variaciones porcentuales extremas.
 
-La versión final del modelo reemplaza el enfoque inicial basado en CAGR (2016–2021) por este crecimiento interanual comparable, incorporando además la exclusión explícita de anomalías estructurales (LTFM).
+La versión final del modelo reemplaza el enfoque inicial basado en CAGR (2016–2021) por este crecimiento interanual comparable, incorporando además la exclusión explícita de anomalías estructurales (**LTFM y LLBG**).
 
 ---
 
@@ -119,7 +119,7 @@ La versión final del modelo reemplaza el enfoque inicial basado en CAGR (2016�
 * Validación del grano real del dataset (aeropuerto × día).
 * Corrección de inconsistencias de nomenclatura (LLBG).
 * Utilización de movimientos totales como métrica principal.
-* Exclusión de LTFM del componente de crecimiento por cambio estructural.
+* Exclusión de LTFM y LLBG del componente de crecimiento (cambio estructural / serie histórica incompleta).
 * Comparación de períodos homogéneos para Recovery Rate.
 * Normalización de componentes del COS.
 * Implementación de criterios de elegibilidad directamente en DAX.
@@ -132,9 +132,9 @@ La versión final del modelo reemplaza el enfoque inicial basado en CAGR (2016�
 * **55,6% del tráfico europeo concentrado en cinco países**
 * **84 de 332 aeropuertos generan aproximadamente el 80% del tráfico**
 * **Caída de tráfico 2020 vs. 2019:** -56,8%
-* **Recuperación Ene–May 2022 vs. Ene–May 2019:** 76,6%
+* **Recuperación Ene–May 2022 vs. Ene–May 2019:** 77,1%
 
-Tras el rediseño metodológico, **Frankfurt, Milán-Malpensa y Antalya** emergen como los mercados con mayor potencial estratégico según el COS.
+Tras el rediseño metodológico, **Frankfurt, Milán-Malpensa, Antalya y Sevilla** emergen como los mercados con mayor potencial estratégico según el COS, entre los 104 aeropuertos elegibles.
 
 ---
 
