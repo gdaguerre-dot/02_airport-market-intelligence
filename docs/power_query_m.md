@@ -64,9 +64,6 @@ in
 5. Un segundo `ReplaceValue` corrige `"Tel Aviv - Tel Aviv - Ben Gurion International"` → `"Tel Aviv - Ben Gurion International"`.
 6. `Filas filtradas1` — otro filtro `each true`.
 
-> 🔧 **Nota de limpieza (no bloqueante, pero visible para cualquiera que abra la Advanced Editor):** los pasos 3 y 5 indican que el reemplazo se aplicó dos veces sobre el mismo valor en algún momento del desarrollo — probablemente porque `Replacer.ReplaceText` hace coincidencia de subcadena, no de valor exacto, y al re-ejecutarse sobre un valor ya corregido volvió a insertar el prefijo `"Tel Aviv - "`. El paso 5 es la corrección de ese efecto. Los pasos `Filas filtradas` / `Filas filtradas1` no aportan nada (filtran `each true`) y son probablemente artefactos de edición en la interfaz de Power Query.
->
-> Esto **no afecta el resultado ni la validez de los datos** — la consulta funciona correctamente tal como está. Pero si querés una versión más prolija para el repositorio, esto es funcionalmente equivalente en un solo paso:
 > ```m
 > #"Nombre estandarizado" = Table.ReplaceValue(
 >     #"Fecha convertida a solo fecha",
@@ -76,7 +73,6 @@ in
 >     {"APT_NAME"}
 > )
 > ```
-> Dejo documentado el código real (con los 6 pasos) porque es el que efectivamente corre en el `.pbix` que vas a subir — prefiero que la documentación coincida exactamente con el archivo antes que mostrar una versión "ideal" que no es la que hay en el repo.
 
 ---
 
@@ -122,7 +118,7 @@ in
     Estructura_Final_Dim_Aeropuerto
 ```
 
-> 🔧 **Nota de redundancia:** el paso `Nombre_Estandarizado` vuelve a aplicar la corrección de "Ben Gurion International" sobre datos que ya vienen de `Flights_Clean` (que ya la aplicó). Como esta versión usa comparación exacta (`if _ = "Ben Gurion International"`, no substring), no genera el efecto de doble reemplazo del punto anterior — simplemente no encuentra coincidencias y no hace nada. Es lógica duplicada pero inofensiva; se podría eliminar este paso y usar `Aeropuertos_Unicos = Table.Distinct(Seleccion_Columnas_Aeropuerto)` directamente.
+> **Nota de redundancia:** el paso `Nombre_Estandarizado` vuelve a aplicar la corrección de "Ben Gurion International" sobre datos que ya vienen de `Flights_Clean` (que ya la aplicó). Como esta versión usa comparación exacta (`if _ = "Ben Gurion International"`, no substring), no genera el efecto de doble reemplazo del punto anterior — simplemente no encuentra coincidencias y no hace nada. Es lógica duplicada pero inofensiva; se podría eliminar este paso y usar `Aeropuertos_Unicos = Table.Distinct(Seleccion_Columnas_Aeropuerto)` directamente.
 
 Columnas finales: `ICAO_Aeropuerto`, `Aeropuerto`, `Pais_ID`, `Pais`.
 
@@ -162,7 +158,7 @@ in
 
 Columnas finales: `Fecha`, `Año`, `Mes_Numero`, `Mes_Nombre`, `Trimestre`, `Año_Mes`, `Día`, `Día_Semana_Numero`, `Día_Semana_Nombre`, `Semana_Año`.
 
-> 🔧 **Nota menor:** el paso `Extraccion_Numero_Mes` (nombre heredado de una etapa anterior de la consulta) en realidad recorta el texto de `FLT_DATE` a 10 caracteres antes de tipificarlo como fecha — no extrae el número de mes. El nombre del paso no describe lo que hace; es solo un tema de legibilidad del código, no afecta el resultado.
+> **Nota menor:** el paso `Extraccion_Numero_Mes` (nombre heredado de una etapa anterior de la consulta) en realidad recorta el texto de `FLT_DATE` a 10 caracteres antes de tipificarlo como fecha — no extrae el número de mes. El nombre del paso no describe lo que hace; es solo un tema de legibilidad del código, no afecta el resultado.
 
 ---
 
@@ -202,5 +198,3 @@ Las columnas IFR se conservan en la tabla de hechos (por completitud del dato) a
 | `FLT_DEP_IFR_2` | `Salidas_IFR` | Fact_TraficoAereo |
 | `FLT_ARR_IFR_2` | `Llegadas_IFR` | Fact_TraficoAereo |
 | `FLT_TOT_IFR_2` | `Total_IFR` | Fact_TraficoAereo |
-
-> Esta tabla es importante porque las medidas DAX en `dax_measure_catalog.md` referencian los nombres **finales** (`Vuelos_Totales`, `ICAO_Aeropuerto`, etc.), no los nombres originales del CSV/SQL. Si en algún otro documento del proyecto aparece `Movimientos_Totales` en vez de `Vuelos_Totales`, es una inconsistencia de nombre respecto al modelo real — ver el punto correspondiente en el análisis que te mandé sobre el `.pbix`.
