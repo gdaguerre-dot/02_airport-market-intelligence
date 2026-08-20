@@ -12,13 +12,31 @@ A partir de una auditoría completa del dataset y del indicador original, el pro
 
 ## Executive summary
 
-* **688.099 registros analizados**
-* **332 aeropuertos**
-* **42 países europeos**
-* **Período:** 2016–2022
-* **Granularidad:** aeropuerto × día
+- **688.099 registros analizados**
+- **332 aeropuertos**
+- **42 países europeos**
+- **Período:** 2016–2022
+- **Granularidad:** aeropuerto × día
 
 El proyecto evolucionó desde un dashboard descriptivo hacia un **framework analítico documentado**, incorporando una capa de validación SQL, modelado dimensional, criterios explícitos de elegibilidad y una arquitectura DAX alineada con la lógica de negocio.
+
+---
+
+## Vista previa del dashboard
+
+<p>
+  <img src="https://github.com/gdaguerre-dot/Airport-market-intelligence/raw/main/images/dashboard_overview.png" width="49%" alt="Executive Overview" />
+  <img src="https://github.com/gdaguerre-dot/Airport-market-intelligence/raw/main/images/dashboard_country_analysis.png" width="49%" alt="Country Analysis" />
+</p>
+<p>
+  <img src="https://github.com/gdaguerre-dot/Airport-market-intelligence/raw/main/images/dashboard_airport_analysis.png" width="49%" alt="Airport Analysis" />
+  <img src="https://github.com/gdaguerre-dot/Airport-market-intelligence/raw/main/images/dashboard_air_traffic_evolution.png" width="49%" alt="Air Traffic Evolution" />
+</p>
+<p>
+  <img src="https://github.com/gdaguerre-dot/Airport-market-intelligence/raw/main/images/dashboard_strategic_opportunities.png" width="49%" alt="Strategic Opportunities" />
+</p>
+
+*Las cinco páginas del dashboard ejecutivo — cada una responde una pregunta específica de negocio, ver detalle en "Dashboard pages" más abajo.*
 
 ---
 
@@ -84,12 +102,12 @@ Commercial Prioritization
 El dashboard fue construido sobre un **esquema estrella (Star Schema)**.
 
 **Tabla de hechos**
-* Fact_TraficoAereo
+- Fact_TraficoAereo
 
 **Dimensiones**
-* Dim_Fecha
-* Dim_Aeropuerto
-* Dim_Pais
+- Dim_Fecha
+- Dim_Aeropuerto
+- Dim_Pais
 
 Este diseño permite optimizar rendimiento, inteligencia temporal, segmentación y escalabilidad del modelo.
 
@@ -101,8 +119,8 @@ El principal aporte analítico del proyecto es el desarrollo del **Congestion Op
 
 El indicador combina dos dimensiones estratégicas:
 
-* **Market Share Normalized**
-* **Growth Score**
+- **Market Share Normalized**
+- **Growth Score**
 
 ```
 COS = 0.50 × Market Share Normalized + 0.50 × Growth Score
@@ -116,23 +134,23 @@ La versión final del modelo reemplaza el enfoque inicial basado en CAGR (2016�
 
 ## Main methodological decisions
 
-* Validación del grano real del dataset (aeropuerto × día).
-* Corrección de inconsistencias de nomenclatura (LLBG).
-* Utilización de movimientos totales como métrica principal.
-* Exclusión de LTFM y LLBG del componente de crecimiento (cambio estructural / serie histórica incompleta).
-* Comparación de períodos homogéneos para Recovery Rate.
-* Normalización de componentes del COS.
-* Implementación de criterios de elegibilidad directamente en DAX.
+- Validación del grano real del dataset (aeropuerto × día).
+- Corrección de inconsistencias de nomenclatura (LLBG).
+- Utilización de movimientos totales como métrica principal.
+- Exclusión de LTFM y LLBG del componente de crecimiento (cambio estructural / serie histórica incompleta).
+- Comparación de períodos homogéneos para Recovery Rate.
+- Normalización de componentes del COS.
+- Implementación de criterios de elegibilidad directamente en DAX.
 
 ---
 
 ## Results
 
-* **87.056.538 movimientos aéreos analizados**
-* **55,6% del tráfico europeo concentrado en cinco países**
-* **84 de 332 aeropuertos generan aproximadamente el 80% del tráfico**
-* **Caída de tráfico 2020 vs. 2019:** -56,8%
-* **Recuperación Ene–May 2022 vs. Ene–May 2019:** 77,1%
+- **87.056.538 movimientos aéreos analizados**
+- **55,6% del tráfico europeo concentrado en cinco países**
+- **84 de 332 aeropuertos generan aproximadamente el 80% del tráfico**
+- **Caída de tráfico 2020 vs. 2019:** -56,8%
+- **Recuperación Ene–May 2022 vs. Ene–May 2019:** 77,1%
 
 Tras el rediseño metodológico, **Frankfurt, Milán-Malpensa, Antalya y Sevilla** emergen como los mercados con mayor potencial estratégico según el COS, entre los 104 aeropuertos elegibles.
 
@@ -142,11 +160,11 @@ Tras el rediseño metodológico, **Frankfurt, Milán-Malpensa, Antalya y Sevilla
 
 El dashboard ejecutivo está organizado en cinco páginas:
 
-* Executive Overview
-* Country Analysis
-* Airport Analysis
-* Air Traffic Evolution
-* Strategic Opportunities
+- **Executive Overview** — panorama general del tráfico y KPIs principales.
+- **Country Analysis** — desagregación por país.
+- **Airport Analysis** — desagregación por aeropuerto individual.
+- **Air Traffic Evolution** — evolución temporal, incluyendo caída y recuperación pandémica.
+- **Strategic Opportunities** — ranking final según el COS rediseñado.
 
 Cada página responde una pregunta específica de negocio y forma parte de una narrativa analítica progresiva.
 
@@ -186,7 +204,7 @@ airport-market-intelligence/
 
 El documento completo del proyecto se encuentra en:
 
-**[Airport-Market-Intelligence-BI-Case-Study.pdf](./Airport-Market-Intelligence-BI-Case-Study.pdf)**
+**[Airport-Market-Intelligence-BI-Case-Study.pdf](https://github.com/gdaguerre-dot/Airport-market-intelligence/blob/main/Airport-Market-Intelligence-BI-Case-Study.pdf)**
 
 ---
 
@@ -200,12 +218,12 @@ SQL Server · Power Query (M) · DAX · Power BI · Star Schema · Business Inte
 
 El proyecto utiliza información histórica de tráfico aéreo y no incorpora:
 
-* demoras,
-* cancelaciones,
-* capacidad aeroportuaria,
-* conectividad de rutas,
-* participación de aerolíneas,
-* variables macroeconómicas.
+- demoras,
+- cancelaciones,
+- capacidad aeroportuaria,
+- conectividad de rutas,
+- participación de aerolíneas,
+- variables macroeconómicas.
 
 El **Congestion Opportunity Score (COS)** constituye un indicador de priorización estratégica y no una medición operativa certificada de congestión aeroportuaria.
 
@@ -217,7 +235,7 @@ El **Congestion Opportunity Score (COS)** constituye un indicador de priorizaci�
 
 Business Intelligence · Data Analytics · SQL · Power BI · DAX
 
-GitHub: [https://github.com/gdaguerre-dot](https://github.com/gdaguerre-dot)
+GitHub: <https://github.com/gdaguerre-dot>
 
 ---
 
