@@ -41,19 +41,19 @@ in
 
 ## 2. Flights_Clean
 
-Tipifica columnas y corrige la inconsistencia de nomenclatura detectada en `APT_NAME` para el aeropuerto de Tel Aviv (ver `03_data_quality_assessment.sql`).
+Tipifica columnas y corrige la inconsistencia de nomenclatura detectada en `APT_NAME` para el aeropuerto de Tel Aviv (LLBG) mediante una comparacion exacta y un unico reemplazo condicional (ver `03_data_quality_assessment.sql`).
 
 ```m
 let
     Origen = Flights_Raw,
     #"Tipos de datos establecidos" = Table.TransformColumnTypes(Origen,{{"FLT_DATE", type datetime}, {"FLT_DEP_1", Int64.Type}, {"FLT_ARR_1", Int64.Type}, {"FLT_TOT_1", Int64.Type}}),
     #"Fecha convertida a solo fecha" = Table.TransformColumns(#"Tipos de datos establecidos",{{"FLT_DATE", DateTime.Date, type date}}),
-    #"Valor reemplazado" = Table.ReplaceValue(#"Fecha convertida a solo fecha","Ben Gurion International","Tel Aviv - Ben Gurion International",Replacer.ReplaceText,{"APT_NAME"}),
-    #"Filas filtradas" = Table.SelectRows(#"Valor reemplazado", each true),
-    #"Valor reemplazado1" = Table.ReplaceValue(#"Filas filtradas","Tel Aviv - Tel Aviv - Ben Gurion International","Tel Aviv - Ben Gurion International",Replacer.ReplaceText,{"APT_NAME"}),
-    #"Filas filtradas1" = Table.SelectRows(#"Valor reemplazado1", each true)
+    #"Nombre de aeropuerto estandarizado" = Table.TransformColumns(
+        #"Fecha convertida a solo fecha",
+        {{"APT_NAME", each if _ = "Ben Gurion International" then "Tel Aviv - Ben Gurion International" else _, type text}}
+    )
 in
-    #"Filas filtradas1"
+    #"Nombre de aeropuerto estandarizado"
 ```
 
 **Qué hace cada paso:**

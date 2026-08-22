@@ -390,6 +390,14 @@ AVERAGEX(
     [COS]
 )
 ```
+### Average Flights per Airport
+```dax
+Average Flights per Airport =
+DIVIDE(
+    [Total Flights],
+    [Total Airports]
+)
+```
 
 ---
 
